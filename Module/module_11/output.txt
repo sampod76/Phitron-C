@@ -1,0 +1,4 @@
+2 have total  -> 2 
+3 have total  -> 1 
+4 have total  -> 3 
+5 have total  -> 4 
