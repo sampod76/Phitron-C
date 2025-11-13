@@ -23,7 +23,7 @@ int main()
         starSmail += 2;
         spaceSmail--;
     }
-    printf("\n");
+    // printf("\n");
     int startBig = n * 2 - 1;
     int spaceBig = 0;
     // big to small
