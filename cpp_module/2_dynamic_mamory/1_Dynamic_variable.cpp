@@ -21,5 +21,6 @@ int main()
 {
     fun();
     cout << "Main --> " << *p << endl;
+    delete p; // when you action done you can delete dynamic varialbe
     return 0;
 }
