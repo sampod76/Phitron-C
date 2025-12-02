@@ -20,3 +20,20 @@ int main()
 
     return 0;
 }
+
+/*
+    char s[100001];
+    while (cin.getline(s, 100001))
+    {
+        int sLength = strlen(s);
+        sort(s, s + sLength);
+        for (int i = 0; i < sLength; i++)
+        {
+            if (s[i] != ' ')
+            {
+                cout << s[i];
+            }
+        }
+        cout << endl;
+    }
+*/
