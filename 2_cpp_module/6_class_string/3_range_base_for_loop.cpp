@@ -8,6 +8,11 @@ int main()
     {
         cout << c << endl;
     }
+    // or
+    for (auto c : s)
+    {
+        cout << c << endl;
+    }
     return 0;
 }
 
