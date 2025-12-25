@@ -28,6 +28,7 @@ int main()
 
     // vector<int> v = {1, 2, 3, 4};
     // 👉 Type 4: direct initialization (initializer list)
+    // Vetor resized to 9
 
     /*
     ===============================
@@ -54,5 +55,9 @@ int main()
         // index ব্যবহার করে element access
     }
 
+    v.resize(9);
+    cout << v.size();
+    v.resize(9, 100); // resize and fillup default value
+    cout << v.size();
     return 0;
 }
