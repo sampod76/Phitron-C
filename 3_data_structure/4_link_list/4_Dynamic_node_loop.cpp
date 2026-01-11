@@ -17,12 +17,16 @@ int main()
     Node *head = new Node(10);
     Node *a = new Node(20);
     Node *b = new Node(30);
-
-    head->next = a; // not &a --> a is also pointer/address
+    Node *c = new Node(50);
+    head->next = a;
     a->next = b;
-    cout << head->value << endl;
-    cout << a->value << endl;
-    cout << b->value << endl;
+    b->next = c;
+    Node *temp = head; // pointer/address head node
+    while (temp != NULL)
+    {
+        cout << temp->value << endl;
+        temp = temp->next;
+    }
 
-        return 0;
+    return 0;
 }
