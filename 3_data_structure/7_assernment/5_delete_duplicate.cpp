@@ -29,8 +29,32 @@ void print_linked_list(Node *head)
     Node *temp = head;
     while (temp != NULL)
     {
-        cout << temp->value << endl;
+        cout << temp->value << " ";
         temp = temp->next;
+    }
+}
+
+void remove_duplicate(Node *&head, Node *&tail)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        Node *temp2 = temp->next;
+
+        while (temp2 != NULL)
+        {
+
+            if (temp->value == temp2->value)
+            {
+            }
+            else
+            {
+
+                temp2 = temp2->next;
+            }
+        }
+
+        temp = temp2;
     }
 }
 int main()
@@ -47,6 +71,7 @@ int main()
         }
         insert_into_tail(head, tail, value);
     }
+    remove_duplicate(head, tail);
     print_linked_list(head);
 
     return 0;

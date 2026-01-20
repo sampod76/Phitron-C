@@ -80,3 +80,20 @@ int main()
 
     return 0;
 }
+
+#include <bits/stdc++.h>
+
+using namespace std;
+class Node
+{
+public:
+    Node *previewsNode;
+    int value;
+    Node *next;
+    Node(int value)
+    {
+        previewsNode = NULL;
+        this->value = value;
+        next = NULL;
+    }
+};

@@ -24,7 +24,7 @@ void insert_into_tail(Node *&head, Node *&tail, int value)
     tail->next = newNode; // old tail in add next = newNode address
     tail = newNode;       // old tail to replace newNode
 }
-void print_linked_list(Node *head)
+void print_link_list(Node *head)
 {
     Node *temp = head;
     while (temp != NULL)
@@ -32,6 +32,17 @@ void print_linked_list(Node *head)
         cout << temp->value << endl;
         temp = temp->next;
     }
+}
+void delete_at_any_pos(Node *head, int idx) //! not full please check 4_query_head_tail_pos.cpp assirnment 7
+{
+    Node *temp = head;
+    for (int i = 0; i < idx - 1; i++)
+    {
+        temp = temp->next;
+    }
+    Node *deleteNode = temp->next; // which node delete
+    temp->next = deleteNode->next; //
+    delete deleteNode;
 }
 int main()
 {
@@ -47,7 +58,8 @@ int main()
         }
         insert_into_tail(head, tail, value);
     }
-    print_linked_list(head);
+    delete_at_any_pos(head, 2);
+    print_link_list(head);
 
     return 0;
 }
