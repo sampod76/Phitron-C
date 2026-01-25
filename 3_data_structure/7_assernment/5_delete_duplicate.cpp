@@ -46,7 +46,7 @@ void remove_duplicate(Node *&head, Node *&tail)
 
             if (temp->value == temp2->value)
             {
-            }
+                        }
             else
             {
 
