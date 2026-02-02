@@ -21,8 +21,8 @@ void insert_into_tail(Node *&head, Node *&tail, int value)
         tail = newNode;
         return;
     }
-    tail->next = newNode; // old tail in add next = newNode address
-    tail = newNode;       // old tail to replace newNode
+    tail->next = newNode;
+    tail = newNode;
 }
 void print_linked_list(Node *head)
 {
@@ -32,31 +32,36 @@ void print_linked_list(Node *head)
         cout << temp->value << " ";
         temp = temp->next;
     }
+    cout << endl;
 }
 
-void remove_duplicate(Node *&head, Node *&tail)
+void remove_duplicate(Node *head, Node *&tail)
 {
-    Node *temp = head;
-    while (temp != NULL)
+    Node *current = head;
+    while (current != NULL)
     {
-        Node *temp2 = temp->next;
-
-        while (temp2 != NULL)
+        Node *runner = current;
+        while (runner->next != NULL)
         {
-
-            if (temp->value == temp2->value)
+            if (runner->next->value == current->value)
             {
+                Node *deleteNode = runner->next;
+                runner->next = runner->next->next;
+                if (deleteNode == tail) 
+                {
+                    tail = runner;
+                }
+                delete deleteNode;
             }
             else
             {
-
-                temp2 = temp2->next;
+                runner = runner->next;
             }
         }
-
-        temp = temp2;
+        current = current->next;
     }
 }
+
 int main()
 {
     Node *head = NULL;
@@ -65,7 +70,7 @@ int main()
     while (true)
     {
         cin >> value;
-        if (value == -1) // bec
+        if (value == -1)
         {
             break;
         }
