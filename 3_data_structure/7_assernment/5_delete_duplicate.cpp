@@ -45,18 +45,14 @@ void remove_duplicate(Node *head, Node *&tail)
         {
             if (runner->next->value == current->value)
             {
-<<<<<<< HEAD
                 Node *deleteNode = runner->next;
                 runner->next = runner->next->next;
-                if (deleteNode == tail) 
+                if (deleteNode == tail)
                 {
                     tail = runner;
                 }
                 delete deleteNode;
             }
-=======
-                        }
->>>>>>> 25c4002171a9936313a68d7f63e3b7dc654a9e09
             else
             {
                 runner = runner->next;

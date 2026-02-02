@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+// https://phitron.io/ph048/video/ph048-8_9-insert-at-any-position
 using namespace std;
 class Node
 {
@@ -25,6 +25,23 @@ void print_forward(Node *head)
     }
     cout << endl;
 }
+// https://phitron.io/ph048/video/ph048-8_9-insert-at-any-position
+void insert_at_any_position(Node *&head, int idx, int value)
+{
+    Node *temp = head;
+    for (int i = 0; i < idx - 1; i++)
+    {
+        temp = temp->next;
+    }
+    Node *newNode = new Node(value);
+    // cout << temp->value;
+    // new node full fillup
+    newNode->prev = temp;
+    newNode->next = temp->next;
+    // temp->next ===> it is new node ar next
+    temp->next->prev = newNode; // or newNode.next.prev = newNode
+    temp->next = newNode;
+};
 
 int main()
 {
@@ -37,6 +54,7 @@ int main()
     a->next = tail;
     tail->prev = a;
 
+    insert_at_any_position(head, 2, 100);
     print_forward(head);
 
     return 0;
