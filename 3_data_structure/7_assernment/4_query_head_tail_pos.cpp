@@ -79,35 +79,38 @@ void delete_at_any_pos(Node *&head, Node *&tail, int idx)
     }
 
     // head বাদে অন্য কোনো position ডিলিট করার জন্য
-    // temp দিয়ে traversal শুরু করলাম
-    Node *temp = head;
+    // traversalNode দিয়ে traversal শুরু করলাম
+    Node *traversalNode = head;
 
-    // temp কে (idx-1) তম নোড পর্যন্ত নিয়ে যাবো
+    // traversalNode কে (idx-1) তম নোড পর্যন্ত নিয়ে যাবো
     for (int i = 0; i < idx - 1; i++)
     {
-        // যদি মাঝপথেই temp->next NULL হয়ে যায়,
+        // যদি মাঝপথেই traversalNode->next NULL হয়ে যায়,
         // তাহলে index invalid, তাই কিছুই করবো না
-        if (temp->next == NULL)
+        if (traversalNode->next == NULL)
             return;
 
-        temp = temp->next;
+        traversalNode = traversalNode->next;
     }
 
     // আবার চেক করছি, কারণ idx যদি লিস্টের বাইরে হয়
-    // তাহলে temp->next NULL হতে পারে
-    if (temp->next == NULL)
+    // তাহলে traversalNode->next NULL হতে পারে | তুমি যেটা ডিলিট করতে চাও, সেটা যদি একদম last index-এর পরের নোড হয়, তাহলে তার কোনো ঠিকানা থাকে না (NULL)। for Loop এর ভিতরে সেটা ধরা পড়ে না, কারণ আমরা traversal করি idx-1 পর্যন্ত। তাই traversalNode ঠিক থাকে, কিন্তু traversalNode->next NULL হয় , not possible delete। এই NULL address ব্যবহার হওয়া থেকে বাঁচানোর জন্যই এই extra check দরকার। যদি লাস্ট ইনডেক্সের পরের ইনডেক্স না হয়ে অন্য যেকোনো ভুল index হতো, তাহলে সেটা for loop-এর ভিতরেই ধরা পড়ে যেত
+    if (traversalNode->next == NULL)
         return;
 
     // যেই নোডটা ডিলিট করবো, সেটাকে ধরলাম
-    Node *deleteNode = temp->next;
+    Node *deleteNode = traversalNode->next;
 
     // deleteNode কে লিস্ট থেকে বিচ্ছিন্ন করলাম
-    temp->next = deleteNode->next;
+    traversalNode->next = deleteNode->next;
 
     // যদি deleteNode-টাই tail হয়,
     // তাহলে tail কে এক ধাপ পিছিয়ে temp এ সেট করতে হবে
     if (deleteNode == tail)
-        tail = temp;
+    {
+
+        tail = traversalNode;
+    }
 
     // অবশেষে মেমোরি থেকে নোড ডিলিট
     delete deleteNode;
