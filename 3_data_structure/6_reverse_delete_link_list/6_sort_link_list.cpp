@@ -34,6 +34,7 @@ void print_linked_list(Node *head)
     }
     cout << endl;
 }
+// https://phitron.io/ph048/video/ph048-6_9-sorting-a-linked-list-with-selection-sort
 void sort_linked_list(Node *head)
 {
     for (Node *i = head; i->next != NULL; i = i->next)
