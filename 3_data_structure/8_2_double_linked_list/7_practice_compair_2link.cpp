@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-// https://phitron.io/ph048/video/ph048-8_9-insert-at-any-position
+// https://docs.google.com/document/d/1FaTqupuytyu0Ktlz9fdXU41T1EDVqWjNb3xwraCWgxo/edit?tab=t.0
 using namespace std;
 class Node
 {
