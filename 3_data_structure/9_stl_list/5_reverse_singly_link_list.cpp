@@ -34,16 +34,18 @@ void print_linked_list(Node *head)
     }
 }
 // https://phitron.io/ph048/video/ph048-9_8-reverse-singly-linked-list-implementation
-void reverse_link_list(Node *&head, Node *currentNode)
+// batter-understand:  https://www.notion.so/sampod/reverse-link-list-2fd7a1bce8f580fd8f73f9a381104818?source=copy_link
+void reverse_link_list(Node *&head, Node *&tail, Node *currentNode)
 {
     if (currentNode->next == NULL)
     {
         head = currentNode;
         return;
     }
-    reverse_link_list(head, currentNode->next);
+    reverse_link_list(head, tail, currentNode->next);
     currentNode->next->next = currentNode;
     currentNode->next = NULL;
+    tail = currentNode;
 }
 
 int main()
@@ -61,7 +63,9 @@ int main()
         insert_into_tail(head, tail, value);
     }
     Node *currentNode = head;
-    reverse_link_list(head, currentNode);
+    reverse_link_list(head, tail, currentNode);
+    cout << head->value << endl;
+    cout << tail->value << endl;
 
     return 0;
 }
