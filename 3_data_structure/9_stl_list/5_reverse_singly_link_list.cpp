@@ -34,18 +34,20 @@ void print_linked_list(Node *head)
     }
 }
 // https://phitron.io/ph048/video/ph048-9_8-reverse-singly-linked-list-implementation
-// batter-understand:  https://www.notion.so/sampod/reverse-link-list-2fd7a1bce8f580fd8f73f9a381104818?source=copy_link
-void reverse_link_list(Node *&head, Node *&tail, Node *currentNode)
+// batter-understand:  https://phitron.io/ph048/video/ph048-9_9-reverse-singly-linked-list-animated
+// https://www.notion.so/sampod/reverse-link-list-2fd7a1bce8f580fd8f73f9a381104818?source=copy_link
+void reverse_link_list(Node *&head, Node *&tail, Node *currentTempNode)
 {
-    if (currentNode->next == NULL)
+    if (currentTempNode->next == NULL) // last node a brack
     {
-        head = currentNode;
+        head = currentTempNode;
         return;
     }
-    reverse_link_list(head, tail, currentNode->next);
-    currentNode->next->next = currentNode;
-    currentNode->next = NULL;
-    tail = currentNode;
+    reverse_link_list(head, tail, currentTempNode->next);
+    currentTempNode->next->next = currentTempNode;
+    currentTempNode->next = NULL;
+    // when temp node change then at time change tail then when our temp node point old head then original tail change
+    tail = currentTempNode;
 }
 
 int main()
@@ -62,8 +64,8 @@ int main()
         }
         insert_into_tail(head, tail, value);
     }
-    Node *currentNode = head;
-    reverse_link_list(head, tail, currentNode);
+    Node *currentTempNode = head;
+    reverse_link_list(head, tail, currentTempNode);
     cout << head->value << endl;
     cout << tail->value << endl;
 

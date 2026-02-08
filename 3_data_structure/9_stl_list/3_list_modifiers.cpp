@@ -13,7 +13,7 @@ int main()
     l2.pop_front();
     // l2.begin() → লিস্টের প্রথম এলিমেন্টের iterator রিটার্ন করে | next(l2.begin(), 2) → প্রথম এলিমেন্ট থেকে 2 ধাপ সামনে গিয়ে যে iterator পাওয়া যায়
     // অর্থাৎ index = 2 (0-based হিসেবে)
-    auto index = next(l2.begin(), 2);
+    auto index = next(l2.begin(), 2); // auto/ list<int>::iterator
     // insert(index, 500) → index যেই জায়গা নির্দেশ করছে, তার আগেই 500 ভ্যালুটা insert হবে
     l2.insert(index, 500);
     list<int> l3 = {121, 320, 254};
