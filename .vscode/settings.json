@@ -1,0 +1,25 @@
+{
+  // ✅ Keep normal language suggestions
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.snippetSuggestions": "inline",
+  "editor.wordBasedSuggestions": "matchingDocuments",
+
+  // ❌ Turn OFF ghost text / inline AI
+  "editor.inlineSuggest.enabled": false,
+
+  // ❌ Turn OFF all AI-based providers
+  "editor.suggest.showIntelliCode": false,
+  "intellicode.completionsEnabled": false,
+  "github.copilot.enable": { "*": false },
+  "codeium.enable": false,
+  "codeium.enableCompletions": false,
+  "codeium.enableChat": false,
+
+  // ✅ Optional: show parameter hints
+  "editor.parameterHints.enabled": true
+}

@@ -1,0 +1,6 @@
+10 30 
+
+post-increment operator (x++)
+post-decrement  operator (x++)
+pre-increment operator (++x)
+pre-decrement operator (−−𝑥)
