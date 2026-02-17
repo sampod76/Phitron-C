@@ -45,8 +45,23 @@ public:
 };
 int main()
 {
-    int a, b;
+    MyStack s;
+    int n;
+    cin >> n;
 
-    cout << " " << endl;
+    while (n--)
+    {
+        int val;
+        cin >> val;
+        s.push(val);
+    }
+    cout << "Size: " << s.size() << endl;
+    s.pop();
+
+    while (!s.empty())
+    {
+        cout << s.top() << " ";
+        s.pop();
+    }
     return 0;
 }

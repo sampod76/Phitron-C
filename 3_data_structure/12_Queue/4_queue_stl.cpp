@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+/*  */
 int main()
 {
     queue<int> q;
@@ -31,3 +32,16 @@ int main()
     }
     return 0;
 }
+/*
+Push 10:
+Front -> 10 <- Back
+
+Push 20:
+Front -> 10 20 <- Back
+
+Push 30:
+Front -> 10 20 30 <- Back
+
+Pop:
+Front -> 20 30 <- Back
+*/
