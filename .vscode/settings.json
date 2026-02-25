@@ -21,5 +21,8 @@
   "codeium.enableChat": false,
 
   // ✅ Optional: show parameter hints
-  "editor.parameterHints.enabled": true
+  "editor.parameterHints.enabled": true,
+  "cSpell.words": [
+    "void"
+  ]
 }
