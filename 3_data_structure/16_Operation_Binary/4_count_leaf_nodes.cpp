@@ -15,7 +15,6 @@ public:
     }
 };
 // 10 20 30 40 -1 50 60 -1 -1 -1 -1 -1 -1
-// https://phitron.io/ph048/video/ph048-18_7-count-nodes-in-a-binary-tree
 Node *input_tree()
 {
     int val;
@@ -29,79 +28,88 @@ Node *input_tree()
     root = new Node(val);
     queue<Node *> nodeQueue;
     nodeQueue.push(root);
-    //
     while (!nodeQueue.empty())
     {
-        // bar korta hoba;
+        // bar korata hoba queue
         Node *currentNode = nodeQueue.front();
         nodeQueue.pop();
-        //
-        int leftValue, rightValue;
-        cin >> leftValue >> rightValue;
+        // kag start
+        int leftVal, rightVal;
+        cin >> leftVal >> rightVal;
         Node *leftNode, *rightNode;
-        if (leftValue == -1)
-        {
+        if (leftVal == -1)
             leftNode = NULL;
-        }
         else
-        {
-            leftNode = new Node(leftValue);
-        }
-        //
-        if (rightValue == -1)
-        {
+            leftNode = new Node(leftVal);
+        if (rightVal == -1)
             rightNode = NULL;
-        }
         else
-        {
-            rightNode = new Node(rightValue);
-        }
-        //
+            rightNode = new Node(rightVal);
         currentNode->left = leftNode;
         currentNode->right = rightNode;
+        // childreen push
         if (currentNode->left)
             nodeQueue.push(currentNode->left);
         if (currentNode->right)
             nodeQueue.push(currentNode->right);
     }
     return root;
-}
+};
 void printLevelOrder(Node *root)
 {
     if (root == NULL)
     {
-        cout << "No tree";
         return;
     }
     queue<Node *> nodeQueue;
     nodeQueue.push(root);
     while (!nodeQueue.empty())
     {
-        // 1 ) bar korta hoba
+        // bar kora anta hoba
         Node *currentNode = nodeQueue.front();
         nodeQueue.pop();
-        // 2. kag korta hoba
+        // kag kora hoba
         cout << currentNode->value << " ";
+        // children push
         if (currentNode->left)
             nodeQueue.push(currentNode->left);
         if (currentNode->right)
             nodeQueue.push(currentNode->right);
     }
 };
-int countNode(Node *root)
+// যে Node এর কোনো left child এবং right child নেই, তাকে Leaf Node বলে।
+/*
+            10
+           /  \
+         20    30
+        /      /  \
+      40      50   60
+
+এখানে Leaf Node গুলো হলো: 40, 50, 60
+মোট Leaf = 3
+ */
+int count_leaf_nodes(Node *root)
 {
     if (root == NULL)
     {
         return 0;
     }
-    int left = countNode(root->left);
-    int right = countNode(root->right);
-    return left + right + 1;
+    // যদি বর্তমান node এর left এবং right child দুটোই NULL হয়
+    // তাহলে এটা একটি Leaf Node
+    // তাই 1 return করবে
+    if (root->left == NULL && root->right == NULL)
+    {
+        return 1;
+    }
+    int leaf = count_leaf_nodes(root->left);
+    int right = count_leaf_nodes(root->right);
+    return leaf + right;
 };
 int main()
 {
     Node *root = input_tree();
-    int total = countNode(root);
-    cout << total;
+    // printLevelOrder(root);
+    int totalLeafNode = count_leaf_nodes(root);
+    cout << totalLeafNode;
     return 0;
 }
