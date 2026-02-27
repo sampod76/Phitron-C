@@ -22,23 +22,22 @@ public:
 
 // ==========================================
 // Inorder Traversal Function
-// নিয়ম: Left → Root → Right
+// নিয়ম:Root →  Left → Right
 // ==========================================
-void inorder(Node *root)
+void preorder(Node *root)
 {
     // Base Case:
-    // যদি root NULL হয় তাহলে আর কিছু করার নেই
     if (root == NULL)
         return;
 
-    // Step 1: আগে বাম সাবট্রি ট্রাভার্স করবে
-    inorder(root->left);
-
-    // Step 2: তারপর Root প্রিন্ট করবে
+    // Step 1: আগে Root প্রিন্ট করবে
     cout << root->value << " ";
 
+    // Step 2: তারপর বাম সাবট্রি ট্রাভার্স করবে
+    preorder(root->left);
+
     // Step 3: তারপর ডান সাবট্রি ট্রাভার্স করবে
-    inorder(root->right);
+    preorder(root->right);
 }
 
 int main()
@@ -74,8 +73,8 @@ int main()
           40      50    60
     */
 
-    // Inorder Traversal কল করা হচ্ছে
-    inorder(root);
+    // preorder Traversal কল করা হচ্ছে
+    preorder(root);
 
     /*
         Expected Output:
