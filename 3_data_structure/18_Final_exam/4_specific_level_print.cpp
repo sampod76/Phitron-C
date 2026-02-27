@@ -1,22 +1,6 @@
-
 #include <bits/stdc++.h>
 
-#define ll long long int
-#define all(x) x.begin(), x.end()
-#define nl '\n'
-#define fastIO()                  \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0)
-
 using namespace std;
-
-#ifndef ONLINE_JUDGE
-// #include "../DebugTemplate/debug.h"
-#else
-#define debug(x...)
-#define dbgsize(x)
-#endif
 class Node
 {
 public:
@@ -30,6 +14,7 @@ public:
         this->right = NULL;
     }
 };
+
 Node *input_tree()
 {
     int val;
@@ -80,48 +65,83 @@ Node *input_tree()
     }
     return root;
 }
-vector<int> getLeafNodesSortDescLevelOrder(Node *root)
+void printLevelOrder(Node *root)
 {
-    vector<int> v;
     if (root == NULL)
     {
-        return v;
+        cout << "No tree";
+        return;
     }
-    if (root->left == NULL && root->right == NULL)
-    {
-        v.push_back(root->value);
-        return v;
-    }
-    // cout << root->value;
     queue<Node *> nodeQueue;
     nodeQueue.push(root);
     while (!nodeQueue.empty())
     {
-        // bar kora anta hoba
+        // 1 ) bar korta hoba
         Node *currentNode = nodeQueue.front();
         nodeQueue.pop();
-        //
-        if (currentNode->left == NULL && currentNode->right == NULL)
-        {
-            v.push_back(currentNode->value);
-        }
+        // 2. kag korta hoba
+        cout << currentNode->value << " ";
         if (currentNode->left)
             nodeQueue.push(currentNode->left);
         if (currentNode->right)
             nodeQueue.push(currentNode->right);
     }
-    sort(v.begin(), v.end(), greater<int>());
-    return v;
+};
+int max_height(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    if (root->left == NULL && root->right == 0) // 0 - base --> mines Edge/connection count
+        return 0;
+    int l = max_height(root->left);
+    int r = max_height(root->right);
+    return max(l, r) + 1;
+};
+void printLevel(Node *root, int level)
+{
+    vector<int> lv;
+    if (root == NULL)
+    {
+        cout << "No tree";
+        return;
+    }
+
+    queue<pair<Node *, int>> nodePairQueue;
+    nodePairQueue.push({root, 0});
+    while (!nodePairQueue.empty())
+    {
+        // bar korta hoba
+        pair<Node *, int> currentNodePair = nodePairQueue.front();
+        Node *currentNode = currentNodePair.first;
+        int currentLevel = currentNodePair.second;
+        nodePairQueue.pop();
+        // kga korta hoba
+        if (currentLevel == level)
+        {
+            cout << currentNode->value << " ";
+            lv.push_back(currentNode->value);
+        }
+        if (currentNode->left)
+        {
+            nodePairQueue.push({currentNode->left, currentLevel + 1});
+        }
+        if (currentNode->right)
+        {
+            nodePairQueue.push({currentNode->right, currentLevel + 1});
+        }
+    }
 };
 int main()
 {
-    fastIO();
+    int level;
+    cin >> level;
     Node *root = input_tree();
-    // cout << root->value;
-    vector<int> SortDescValue = getLeafNodesSortDescLevelOrder(root);
-    for (int val : SortDescValue)
+    int maxHight = max_height(root);
+    if (level > maxHight) // overflow
     {
-        cout << val << " ";
+        cout << "Invalid";
+        return 0;
     }
+    printLevel(root, level);
     return 0;
 }

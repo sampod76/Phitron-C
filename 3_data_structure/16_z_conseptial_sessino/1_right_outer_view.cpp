@@ -1,22 +1,6 @@
-
 #include <bits/stdc++.h>
 
-#define ll long long int
-#define all(x) x.begin(), x.end()
-#define nl '\n'
-#define fastIO()                  \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0)
-
 using namespace std;
-
-#ifndef ONLINE_JUDGE
-// #include "../DebugTemplate/debug.h"
-#else
-#define debug(x...)
-#define dbgsize(x)
-#endif
 class Node
 {
 public:
@@ -80,48 +64,81 @@ Node *input_tree()
     }
     return root;
 }
-vector<int> getLeafNodesSortDescLevelOrder(Node *root)
+void printLevelOrder(Node *root)
 {
-    vector<int> v;
     if (root == NULL)
     {
-        return v;
+        cout << "No tree";
+        return;
     }
-    if (root->left == NULL && root->right == NULL)
-    {
-        v.push_back(root->value);
-        return v;
-    }
-    // cout << root->value;
     queue<Node *> nodeQueue;
     nodeQueue.push(root);
     while (!nodeQueue.empty())
     {
-        // bar kora anta hoba
+        // 1 ) bar korta hoba
         Node *currentNode = nodeQueue.front();
         nodeQueue.pop();
-        //
-        if (currentNode->left == NULL && currentNode->right == NULL)
-        {
-            v.push_back(currentNode->value);
-        }
+        // 2. kag korta hoba
+        cout << currentNode->value << " ";
         if (currentNode->left)
             nodeQueue.push(currentNode->left);
         if (currentNode->right)
             nodeQueue.push(currentNode->right);
     }
-    sort(v.begin(), v.end(), greater<int>());
-    return v;
+};
+// see after 58 min => https://phitron.io/conceptual-session/693d56dc43d01294b342f8a3
+// 1 2 3 4 -1 2 5 -1 -1 3 -1 -1 -1 -1 -1
+/* // output
+1 3 5
+1 2 4
+ */
+void rightOuterView(Node *root)
+{
+    if (root == NULL)
+        return;
+    cout << root->value << " ";
+    if (root->right)
+    {
+        rightOuterView(root->right);
+    }
+    else if (root->left)
+    {
+        rightOuterView(root->left);
+    }
+};
+void leftOuterView(Node *root)
+{
+    if (root == NULL)
+    {
+        cout << "No tree";
+        return;
+    };
+    cout << root->value << " ";
+    if (root->left)
+    {
+        leftOuterView(root->left);
+    }
+    else if (root->right)
+    {
+        leftOuterView(root->right);
+    }
 };
 int main()
 {
-    fastIO();
     Node *root = input_tree();
-    // cout << root->value;
-    vector<int> SortDescValue = getLeafNodesSortDescLevelOrder(root);
-    for (int val : SortDescValue)
-    {
-        cout << val << " ";
-    }
+    rightOuterView(root);
+    cout << endl;
+    leftOuterView(root);
+
     return 0;
 }
+
+/*
+              1
+           /     \
+          2       3
+         /       /   \
+        4       2     5
+               /
+              3
+*/

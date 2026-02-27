@@ -17,7 +17,6 @@ using namespace std;
 #define debug(x...)
 #define dbgsize(x)
 #endif
-
 class Node
 {
 public:
@@ -31,7 +30,6 @@ public:
         this->right = NULL;
     }
 };
-// https://phitron.io/ph048/video/ph048-18_7-count-nodes-in-a-binary-tree
 Node *input_tree()
 {
     int val;
@@ -82,33 +80,50 @@ Node *input_tree()
     }
     return root;
 }
-int max_height(Node *root)
+
+int count_node(Node *root)
 {
-    // যদি root NULL হয়, তাহলে height = 0
     if (root == NULL)
         return 0;
-
-    // যদি node টি leaf হয় (মানে left ও right দুইটাই NULL)
-    // তাহলে তার height = 0 (কারণ edge নাই)
-    // !যদি তুমি 1-based height (node count) ব্যবহার করো, তাহলে এই লাইনটা দরকার নেই:
-    if (root->left == NULL && root->right == NULL)
+    int l = count_node(root->left);
+    int r = count_node(root->right);
+    return l + r + 1;
+};
+// 40 min after see-->  https://phitron.io/conceptual-session/693d56dc43d01294b342f8a3
+// 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+int max_depth(Node *root)
+{
+    if (root == NULL)
         return 0;
-
-    // বাম সাবট্রির height বের করলাম
-    int l = max_height(root->left);
-
-    // ডান সাবট্রির height বের করলাম
-    int r = max_height(root->right);
-
-    // যেটা বড় (left বা right), সেটার সাথে 1 যোগ করবো
-    // কারণ বর্তমান node থেকে একধাপ নিচে নামছি (১টা edge)
+    if (root->left == NULL && root->right == 0) // 0 - base --> mines Edge/connection count
+        return 0;
+    int l = max_depth(root->left);
+    int r = max_depth(root->right);
     return max(l, r) + 1;
-}
+};
 int main()
 {
     fastIO();
     Node *root = input_tree();
-    int total = max_height(root);
-    cout << total;
+    int totalNode = count_node(root);
+
+    int maxDepthNode = max_depth(root);
+    /*
+    Perfect Binary Tree formula:
+
+    Total Nodes = 2^(h+1) - 1
+
+    where,
+    h = max depth (0-based)
+    */
+    int formulaTotal = pow(2, maxDepthNode + 1) - 1;
+    if (totalNode == formulaTotal)
+    {
+        cout << "YES";
+    }
+    else
+    {
+        cout << "NO";
+    }
     return 0;
 }

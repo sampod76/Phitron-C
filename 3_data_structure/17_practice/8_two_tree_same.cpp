@@ -66,7 +66,7 @@ bool isSameTree(Node *p, Node *q)
     bool l = isSameTree(p->left, q->left);
     bool r = isSameTree(p->right, q->right);
     return l && r;
-}
+};
 int main()
 {
     vector<int> v1 = {1, 2};
