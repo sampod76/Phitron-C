@@ -133,9 +133,10 @@ void printLevel(Node *root, int level)
 };
 int main()
 {
+
+    Node *root = input_tree();
     int level;
     cin >> level;
-    Node *root = input_tree();
     int maxHight = max_height(root);
     if (level > maxHight) // overflow
     {
