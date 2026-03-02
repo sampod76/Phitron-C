@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin
+set -Eeuo pipefail
 
 echo"Pushing to main repository..."
 git push
