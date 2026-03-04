@@ -71,3 +71,18 @@ edge = 8
 source = 0
 destination = 4
 */
+
+/* my question
+7 9
+0 1
+1 3
+3 2
+1 4
+3 5
+2 5
+5 6
+4 6
+0 6
+0
+6
+*/
