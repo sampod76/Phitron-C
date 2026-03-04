@@ -1,14 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-//
 // adjacency list: প্রতিটি node এর সাথে কোন কোন node connected তা রাখবে
 vector<int> adjacencyList[1005]; // max node limit (1005) -->check question
-
 // visited array: কোন node already visit হয়েছে কিনা track করার জন্য
 bool visited[1005];
 
 // BFS function
 //$ https://phitron.io/ph068/video/ph068-2_4-bfs-traversal
+// time complexity-> https://phitron.io/ph068/video/ph068-2_6-complexity-analysis-of-bfs
 void bfs(int startNode)
 {
     queue<int> nodeQueue;
@@ -17,7 +16,7 @@ void bfs(int startNode)
     // start node কে visited mark করা
     visited[startNode] = true;
 
-    while (!nodeQueue.empty())
+    while (!nodeQueue.empty()) // time complexity -> O(N)/O(V)
     {
         // queue থেকে current node বের করা
         int currentNode = nodeQueue.front();
@@ -27,7 +26,7 @@ void bfs(int startNode)
         cout << currentNode << " ";
 
         // current node এর সব neighbour check
-        for (int neighbourNode : adjacencyList[currentNode])
+        for (int neighbourNode : adjacencyList[currentNode]) // Time complexity => O(E) E=edge/connection
         {
             if (visited[neighbourNode] == false)
             {
@@ -38,7 +37,7 @@ void bfs(int startNode)
             }
         }
     }
-}
+} // total Time complexity = O(V+E)
 
 int main()
 {
