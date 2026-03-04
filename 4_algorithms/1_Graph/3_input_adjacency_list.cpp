@@ -6,34 +6,41 @@ Adjacency List হলো এমন একটি পদ্ধতি যেখা�
 */
 #include <bits/stdc++.h>
 using namespace std;
-
+/*
+Source : যে node থেকে connection শুরু হয়।
+Destination: যে node-এ connection যায়।
+*/
 int main()
 {
-    int node, edge;
-    cin >> node >> edge;
-    // 🔹 Adjacency List তৈরি
-    // এখানে আমরা vector of array ব্যবহার করছি
+    int totalNodes, totalEdges;
+    cin >> totalNodes >> totalEdges;
 
-    vector<int> adj_arr[node];
+    // 🔹 Adjacency List তৈরি
+    vector<int> adjacencyList[totalNodes];
+
     // 🔹 Edge input নেওয়া
-    for (int i = 0; i < edge; i++)
+    for (int i = 0; i < totalEdges; i++)
     {
-        int r, c;
-        cin >> r >> c;
-        // r এর সাথে c যুক্ত
-        adj_arr[r].push_back(c);
+        int source, destination;
+        cin >> source >> destination;
+
+        // source এর সাথে destination যুক্ত
+        adjacencyList[source].push_back(destination);
+
         // undirected graph হলে দুই দিকেই push করতে হয়
-        adj_arr[c].push_back(r);
+        adjacencyList[destination].push_back(source);
     }
 
     // 🔹 Graph print করা
-    for (int i = 0; i < node; i++)
+    for (int nodeIndex = 0; nodeIndex < totalNodes; nodeIndex++)
     {
-        cout << i << " -connect-> ";
-        for (int val : adj_arr[i])
+        cout << nodeIndex << " -connect-> ";
+
+        for (int neighbor : adjacencyList[nodeIndex])
         {
-            cout << val << " ";
+            cout << neighbor << " ";
         }
+
         cout << endl;
     }
 

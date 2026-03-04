@@ -14,69 +14,88 @@ using namespace std;
 int main()
 {
     /*
-    node = মোট কয়টা vertex আছে
-    edge = মোট কয়টা connection আছে
+    totalNodes = মোট কয়টা vertex / node আছে
+    totalEdges = মোট কয়টা connection / edge আছে
     */
-    int node, edge;
-    cin >> node >> edge;
+    int totalNodes, totalEdges;
+    cin >> totalNodes >> totalEdges;
 
     /*
     Adjacency Matrix তৈরি
-    এখানে row = node
+
+    এখানে:
+    row = node
     column = node
-    কারণ matrix সবসময় square হয় (node × node)
+
+    কারণ adjacency matrix সবসময় square হয়
+    size = node × node
     */
-    int adj_mat[node][node];
+    int adjacencyMatrix[totalNodes][totalNodes];
 
     /*
-    প্রথমে পুরো matrix 0 দিয়ে initialize করি . মানে শুরুতে কোন node কারো সাথে connected না
+    প্রথমে পুরো matrix 0 দিয়ে initialize করি
+
+    মানে শুরুতে ধরে নিচ্ছি
+    কোন node কারো সাথে connected না
     */
-    /*  for (int i = 0; i < node; i++)
-     {
-         for (int j = 0; j < node; j++)
-         {
-
-             adj_mat[i][j] = 0;
-         }
-     } */
-    // short cut
-    memset(adj_mat, 0, sizeof(adj_mat));
-
     /*
-    এখন edge অনুযায়ী connection বসাবো . যতগুলো edge আছে ততবার ইনপুট নিবো
-    */
-    for (int i = 0; i < edge; i++)
+    for (int row = 0; row < totalNodes; row++)
     {
-        int r, c;
-        cin >> r >> c;
+        for (int col = 0; col < totalNodes; col++)
+        {
+            adjacencyMatrix[row][col] = 0;
+        }
+    }
+    */
+
+    // shortcut method (সব value 0 করা)
+    memset(adjacencyMatrix, 0, sizeof(adjacencyMatrix));
+
+    /*
+    এখন edge অনুযায়ী connection বসাবো | যতগুলো edge আছে ততবার input নিবো
+    */
+    while (totalEdges--)
+    {
+        int sourceNode, destinationNode;
+        cin >> sourceNode >> destinationNode;
 
         /*
-        r এবং c এর মধ্যে connection আছে , তাই matrix[r][c] = 1 . যেহেতু এটা Undirected Graph . তাই matrix[c][r] = 1 ও হবে
+        sourceNode এবং destinationNode এর মধ্যে connection আছে
+
+        তাই matrix[source][destination] = 1
+
+        যেহেতু এটা Undirected Graph
+        তাই reverse connection ও থাকবে
+        matrix[destination][source] = 1
         */
-        adj_mat[r][c] = 1;
-        adj_mat[c][r] = 1;
+        adjacencyMatrix[sourceNode][destinationNode] = 1;
+        adjacencyMatrix[destinationNode][sourceNode] = 1;
     }
 
     /*
-    এখন চাইলে নিজের সাথে নিজের connection (self loop). দেখানোর জন্য diagonal এ 1 বসাতে পারি . মানে i == j হলে 1
+    এখন চাইলে নিজের সাথে নিজের connection (self loop)
+    দেখানোর জন্য diagonal এ 1 বসাতে পারি
+
+    অর্থাৎ:
+    row == col হলে matrix[i][j] = 1
     */
-    for (int i = 0; i < node; i++)
+    for (int row = 0; row < totalNodes; row++)
     {
-        for (int j = 0; j < node; j++)
+        for (int col = 0; col < totalNodes; col++)
         {
-            if (i == j)
-                adj_mat[i][j] = 1;
+            if (row == col)
+                adjacencyMatrix[row][col] = 1;
         }
     }
 
     /*
     এখন পুরো adjacency matrix print করবো
     */
-    for (int i = 0; i < node; i++)
+    for (int row = 0; row < totalNodes; row++)
     {
-        for (int j = 0; j < node; j++)
+        for (int col = 0; col < totalNodes; col++)
         {
-            cout << adj_mat[i][j] << " ";
+            cout << adjacencyMatrix[row][col] << " ";
         }
         cout << endl;
     }
