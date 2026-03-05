@@ -43,10 +43,10 @@ int main()
     int src, dist;
     cin >> src >> dist;
     bfs(src);
-    for (int i = 0; i < totalNode; i++)
-    {
-        cout << i << " --> " << level[i] << endl;
-    }
+    // for (int i = 0; i < totalNode; i++)
+    // {
+    //     cout << i << " --> " << level[i] << endl;
+    // }
 
     cout << level[dist];
     return 0;
