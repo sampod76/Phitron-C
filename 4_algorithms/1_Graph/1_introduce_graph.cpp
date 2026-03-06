@@ -1,4 +1,6 @@
-// https://phitron.io/ph068/video/ph068-1_2-types-of-graph
+// best full details conceptual =>  https://phitron.io/conceptual-session/69873deeeb340b4c4bd2382a
+//  https://phitron.io/ph068/video/ph068-1_2-types-of-graph
+
 /*
 🔹 Graph এর প্রকারভেদ (Types of Graph)
 
