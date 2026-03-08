@@ -40,12 +40,12 @@ void bfs(int src)
 int main()
 {
     int n, e;
-    cin >> n >> e; // node এবং edge ইনপুট
+    cin >> n >> e;
 
     while (e--)
     {
         int s, d;
-        cin >> s >> d; // edge input
+        cin >> s >> d;
 
         adj_list[s].push_back(d); // s -> d connection
         adj_list[d].push_back(s); // undirected graph তাই reverse connection
