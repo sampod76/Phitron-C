@@ -1,5 +1,6 @@
 // 2D Grid=>  https://prnt.sc/nq-ing7GZzLy
 // https://phitron.io/ph068/video/ph068-3_6-dfs-on-2d-grid-implementation-i
+// best animation:  https://phitron.io/ph068/video/ph068-3_8-dfs-on-2d-grid-animated
 #include <bits/stdc++.h>
 using namespace std;
 char grid[105][105];
@@ -30,7 +31,7 @@ void dfs(int srcRow, int srcCol)
         int newRow = srcRow + directions[i].first;
         int newCol = srcCol + directions[i].second;
         // প্রতিটি node থেকে 4টা direction (up, down, left, right) check করা হয়
-        // তাই theoretically totalNode * 4 বার loop run হতে পারে
+        // তাই theoretically Nটি * 4 বার loop run হতে পারে
         // Example: যদি 12টা node visit হয় তাহলে loop execute ≈ 12 * 4 = 48 times
         // কিন্তু print বা dfs call হবে শুধু valid এবং unvisited node এর জন্য
         // cout << newRow << " " << newCol << endl;
