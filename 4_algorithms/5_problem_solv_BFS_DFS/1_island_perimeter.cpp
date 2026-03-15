@@ -33,17 +33,28 @@ public:
             int nextRow = srcRow + directions[i].first;
             int nextCol = srcCol + directions[i].second;
 
-            if (!isValid(nextRow, nextCol) || grid[nextRow][nextCol] == 0)
+            // Check all 4 directions of current land cell
+            if (isValid(nextRow, nextCol) == false)
             {
+                // Case 1: Neighbor cell grid এর বাইরে → অর্থাৎ island এর boundary
+                // তাই এই side perimeter এর অংশ
                 perimeterCount++;
             }
-            else if (!visited[nextRow][nextCol])
+            else if (grid[nextRow][nextCol] == 0)
             {
+                // Case 2: Neighbor cell water (0)
+                // Land এর পাশে water থাকলে সেই edge perimeter
+                perimeterCount++;
+            }
+            else if (!visited[nextRow][nextCol] && grid[nextRow][nextCol] == 1)
+            {
+                // Case 3: Neighbor cell land (1) এবং এখনো visit করা হয়নি
+                // তাই DFS করে island এর বাকি অংশ explore করবো
                 dfs(nextRow, nextCol, grid);
             }
         }
     }
-
+    // https://phitron.io/ph068/video/ph068-5_2-island-perimeter-part-ii
     int islandPerimeter(vector<vector<int>> &grid)
     {
         totalRow = grid.size();
@@ -62,8 +73,8 @@ public:
                 }
             }
         }
-
-        return perimeterCount;
+        cout << perimeterCount;
+        return 0;
     }
 };
 
@@ -90,3 +101,15 @@ int main()
 
     return 0;
 }
+
+/* //question:  https://prnt.sc/1akia6n6zUtR
+Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+
+4 4
+0 1 0 0
+1 1 1 0
+0 1 0 0
+1 1 0 0
+
+output: 16
+*/
