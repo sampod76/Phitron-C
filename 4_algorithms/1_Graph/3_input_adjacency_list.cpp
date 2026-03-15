@@ -17,7 +17,7 @@ int main()
 
     // 🔹 Adjacency List তৈরি
     vector<int> adjacencyList[totalNodes];
-
+    // vector<vector<int>> adjacencyList(totalNode);
     // 🔹 Edge input নেওয়া
     for (int i = 0; i < totalEdges; i++)
     {

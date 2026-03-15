@@ -31,7 +31,7 @@ int main()
     size = node × node
     */
     int adjacencyMatrix[totalNodes][totalNodes];
-
+    // vector<vector<int>> adjacencyList(totalNode, vector<int>(totalNode));
     /*
     প্রথমে পুরো matrix 0 দিয়ে initialize করি
 
@@ -60,12 +60,8 @@ int main()
         cin >> sourceNode >> destinationNode;
 
         /*
-        sourceNode এবং destinationNode এর মধ্যে connection আছে
-
-        তাই matrix[source][destination] = 1
-
-        যেহেতু এটা Undirected Graph
-        তাই reverse connection ও থাকবে
+        sourceNode এবং destinationNode এর মধ্যে connection আছে | তাই matrix[source][destination] = 1
+        যেহেতু এটা Undirected Graph , তাই reverse connection ও থাকবে
         matrix[destination][source] = 1
         */
         adjacencyMatrix[sourceNode][destinationNode] = 1;
@@ -74,9 +70,7 @@ int main()
 
     /*
     এখন চাইলে নিজের সাথে নিজের connection (self loop)
-    দেখানোর জন্য diagonal এ 1 বসাতে পারি
-
-    অর্থাৎ:
+    দেখানোর জন্য diagonal এ 1 বসাতে পারি | অর্থাৎ:
     row == col হলে matrix[i][j] = 1
     */
     for (int row = 0; row < totalNodes; row++)
