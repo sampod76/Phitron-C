@@ -48,11 +48,11 @@ void bfs(int startRow, int startCol)
 int main()
 {
     cin >> totalRow >> totalCol;
-    for (int i = 0; i < totalRow; i++)
+    for (int row = 0; row < totalRow; row++)
     {
-        for (int j = 0; j < totalCol; j++)
+        for (int col = 0; col < totalCol; col++)
         {
-            cin >> grid[i][j];
+            cin >> grid[row][col];
         }
     }
     memset(visited, false, sizeof(visited));

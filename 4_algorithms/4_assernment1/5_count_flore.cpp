@@ -38,24 +38,24 @@ int main()
     cin >> totalRow >> totalCol;
     //
     int srcRow, srcCol, distRow, distCol;
-    for (int i = 0; i < totalRow; i++)
+    for (int row = 0; row < totalRow; row++)
     {
-        for (int j = 0; j < totalCol; j++)
+        for (int col = 0; col < totalCol; col++)
         {
             char inp;
             cin >> inp;
-            grid[i][j] = inp;
+            grid[row][col] = inp;
         }
     }
     vector<int> apartmentSizes;
-    for (int i = 0; i < totalRow; i++)
+    for (int row = 0; row < totalRow; row++)
     {
-        for (int j = 0; j < totalCol; j++)
+        for (int col = 0; col < totalCol; col++)
         {
-            if (visited[i][j] == false && grid[i][j] == '.')
+            if (!visited[row][col] && grid[row][col] == '.')
             {
                 int roomCount = 0;
-                dfs(i, j, roomCount);
+                dfs(row, col, roomCount);
                 apartmentSizes.push_back(roomCount);
             }
         }

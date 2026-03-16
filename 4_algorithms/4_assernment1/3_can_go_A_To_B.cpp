@@ -39,22 +39,23 @@ int main()
     cin >> totalRow >> totalCol;
     //
     int srcRow, srcCol, distRow, distCol;
-    for (int i = 0; i < totalRow; i++)
+    for (int row = 0; row < totalRow; row++)
     {
-        for (int j = 0; j < totalCol; j++)
+        for (int col = 0; col < totalCol; col++)
         {
             char inp;
             cin >> inp;
-            grid[i][j] = inp;
+            grid[row][col] = inp;
+
             if (inp == 'A')
             {
-                srcRow = i;
-                srcCol = j;
+                srcRow = row;
+                srcCol = col;
             }
             else if (inp == 'B')
             {
-                distRow = i;
-                distCol = j;
+                distRow = row;
+                distCol = col;
             }
         }
     }

@@ -36,23 +36,23 @@ int main()
     cin >> totalRow >> totalCol;
     //
 
-    for (int i = 0; i < totalRow; i++)
+    for (int row = 0; row < totalRow; row++)
     {
-        for (int j = 0; j < totalCol; j++)
+        for (int col = 0; col < totalCol; col++)
         {
             char inp;
             cin >> inp;
-            grid[i][j] = inp;
+            grid[row][col] = inp;
         }
     }
     int count = 0;
-    for (int i = 0; i < totalRow; i++)
+    for (int row = 0; row < totalRow; row++)
     {
-        for (int j = 0; j < totalCol; j++)
+        for (int col = 0; col < totalCol; col++)
         {
-            if (visited[i][j] == false && grid[i][j] == '.')
+            if (!visited[row][col] && grid[row][col] == '.')
             {
-                dfs(i, j);
+                dfs(row, col);
                 count++;
             }
         }

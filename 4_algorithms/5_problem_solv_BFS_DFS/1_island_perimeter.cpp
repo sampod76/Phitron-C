@@ -62,17 +62,18 @@ public:
 
         memset(visited, false, sizeof(visited));
 
-        for (int i = 0; i < totalRow; i++)
+        for (int row = 0; row < totalRow; row++)
         {
-            for (int j = 0; j < totalCol; j++)
+            for (int col = 0; col < totalCol; col++)
             {
-                if (!visited[i][j] && grid[i][j] == 1)
+                if (!visited[row][col] && grid[row][col] == 1)
                 {
-                    dfs(i, j, grid);
+                    dfs(row, col, grid);
                     return perimeterCount;
                 }
             }
         }
+
         cout << perimeterCount;
         return 0;
     }
