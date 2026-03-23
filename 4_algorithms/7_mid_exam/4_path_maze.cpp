@@ -1,122 +1,144 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+
+// Direction moves (Right, Left, Up, Down)
 vector<pair<int, int>> directions = {
-    {0, 1},  // right
-    {0, -1}, // left
-    {-1, 0}, // up
-    {1, 0},  // down
+    {0, 1},
+    {0, -1},
+    {-1, 0},
+    {1, 0},
 };
+
+// Grid and helpers
 char grid[1005][1005];
 bool visited[1005][1005];
-int level[1005][1005];
-// please see 1 hour 06 min => https://drive.google.com/file/d/1IC85O8dULLfuxjmBXZQ-E7zsTN0bnJ9L/view   // why use pair<int, int>
-pair<int, int> parent[1005][1005];
-int totalRow, totalCol;
-bool isValid(int nextRow, int nextCol)
+int distanceLevel[1005][1005];
+// please see 1 hour 06 min => https://drive.google.com/file/d/1IC85O8dULLfuxjmBXZQ-E7zsTN0bnJ9L/view // why use pair<int, int>
+pair<int, int> parentCell[1005][1005];
+
+int totalRows, totalCols;
+
+// Check valid cell inside grid
+bool isValidCell(int row, int col)
 {
-    if (nextRow < 0 || nextRow >= totalRow || nextCol < 0 || nextCol >= totalCol)
-    {
-        return false;
-    }
-    return true;
-};
-void bfs(int srcRow, int srcCol)
+    return (row >= 0 && row < totalRows && col >= 0 && col < totalCols);
+}
+
+// BFS traversal from source
+void bfs(int startRow, int startCol)
 {
-    queue<pair<int, int>> cellQueue;
-    cellQueue.push({srcRow, srcCol});
-    visited[srcRow][srcCol] = true;
-    level[srcRow][srcCol] = 0;
-    // parent[srcRow][srcCol] = {-1,-1};
-    while (!cellQueue.empty())
+    queue<pair<int, int>> queueCells;
+
+    queueCells.push({startRow, startCol});
+    visited[startRow][startCol] = true;
+    distanceLevel[startRow][startCol] = 0;
+    // parentCell[startRow][startCol] = {-1, -1};
+    while (!queueCells.empty())
     {
-        // bar kora anta hoba
-        pair<int, int> parentCell = cellQueue.front();
-        cellQueue.pop();
-        int parentRow = parentCell.first;
-        int parentCol = parentCell.second;
-        // kag kortahoba
-        // child barkor queue push
+        pair<int, int> currentCell = queueCells.front();
+        queueCells.pop();
+
+        int currentRow = currentCell.first;
+        int currentCol = currentCell.second;
+
         for (int i = 0; i < 4; i++)
         {
-            int nextRow = parentRow + directions[i].first;
-            int nextCol = parentCol + directions[i].second;
-            if (isValid(nextRow, nextCol) && visited[nextRow][nextCol] == false && grid[nextRow][nextCol] != '#')
+            int nextRow = currentRow + directions[i].first;
+            int nextCol = currentCol + directions[i].second;
+
+            if (isValidCell(nextRow, nextCol) &&
+                !visited[nextRow][nextCol] &&
+                grid[nextRow][nextCol] != '#')
             {
-                cellQueue.push({nextRow, nextCol});
+                queueCells.push({nextRow, nextCol});
                 visited[nextRow][nextCol] = true;
-                level[nextRow][nextCol] = level[parentRow][parentCol] + 1;
-                parent[nextRow][nextCol] = {parentRow, parentCol};
+                distanceLevel[nextRow][nextCol] = distanceLevel[currentRow][currentCol] + 1;
+                parentCell[nextRow][nextCol] = {currentRow, currentCol};
             }
         }
     }
 }
+
 int main()
 {
-    cin >> totalRow >> totalCol;
-    int dRow = 0, dCol = 0, rRow = 0, rCol = 0;
-    for (int row = 0; row < totalRow; row++)
+    cin >> totalRows >> totalCols;
+
+    int destinationRow = 0, destinationCol = 0;
+    int startRow = 0, startCol = 0;
+
+    for (int row = 0; row < totalRows; row++)
     {
-        for (int col = 0; col < totalCol; col++)
+        for (int col = 0; col < totalCols; col++)
         {
             cin >> grid[row][col];
+
             if (grid[row][col] == 'D')
             {
-                dRow = row;
-                dCol = col;
+                destinationRow = row;
+                destinationCol = col;
             }
+
             if (grid[row][col] == 'R')
             {
-                rRow = row;
-                rCol = col;
+                startRow = row;
+                startCol = col;
             }
         }
     }
 
     memset(visited, false, sizeof(visited));
-    memset(parent, -1, sizeof(parent));
-    memset(level, 0, sizeof(level));
-    bfs(rRow, rCol);
-    // cout << level[dRow][dCol];
+    memset(parentCell, -1, sizeof(parentCell));
+    memset(distanceLevel, 0, sizeof(distanceLevel));
 
-    if (visited[dRow][dCol])
+    bfs(startRow, startCol);
+
+    if (visited[destinationRow][destinationCol])
     {
+        int tempRow = destinationRow;
+        int tempCol = destinationCol;
 
-        int distRow = dRow;
-        int distCol = dCol;
-        while (true)
+        while (tempRow != -1 && tempCol != -1)
         {
-            pair<int, int> parentsCell = parent[distRow][distCol];
-            distRow = parentsCell.first;
-            distCol = parentsCell.second;
-            // cout << grid[distRow][distCol];
-            if (grid[distRow][distCol] == 'R')
+            pair<int, int> parent = parentCell[tempRow][tempCol];
+            tempRow = parent.first;
+            tempCol = parent.second;
+
+            if (grid[tempRow][tempCol] == 'R')
             {
                 break;
             }
-            grid[distRow][distCol] = 'X';
-        }
 
-        for (int row = 0; row < totalRow; row++)
-        {
-            for (int col = 0; col < totalCol; col++)
-            {
-                cout << grid[row][col];
-            }
-            cout << endl;
+            grid[tempRow][tempCol] = 'X';
         }
     }
-    else
+
+    // Print final grid
+    for (int row = 0; row < totalRows; row++)
     {
-        for (int row = 0; row < totalRow; row++)
+        for (int col = 0; col < totalCols; col++)
         {
-            for (int col = 0; col < totalCol; col++)
-            {
-                cout << grid[row][col];
-            }
-            cout << endl;
+            cout << grid[row][col];
         }
+        cout << endl;
     }
 
     return 0;
 }
+
+/* input:
+5 6
+...D.#
+.##..#
+....#.
+.R#...
+.#.##.
+
+
+output:
+...D.#
+.##X.#
+.XXX#.
+.R#...
+.#.##.
+
+*/
