@@ -26,8 +26,9 @@ int main()
     {
         int node, toNode, cost;
         cin >> node >> toNode >> cost;
-        adj_mat[node][toNode] = cost;
-        // adj_mat[toNode][node]=cost; // undirected graph
+        adj_mat[node][toNode] = min(adj_mat[node][toNode], cost);
+        //  adj_mat[node][toNode] = cost;
+        // adj_mat[toNode][node]=min(adj_mat[toNode][node], cost); // undirected graph
     }
 
     for (int midNode = 0; midNode < totalNode; midNode++)
