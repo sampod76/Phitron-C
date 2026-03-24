@@ -32,9 +32,9 @@ int main()
         adj_mat[toNode][node] = min(adj_mat[toNode][node], cost); // undirected graph
 
         /*
-        // যদি একই দুইটি node এর মধ্যে একাধিক edge থাকে (যেমন: 0→3 = 5, আবার 0→3 = 1),
-        // তাহলে প্রথমবার একটি value set হবে, পরবর্তীতে নতুন edge আসলে আগের value এর সাথে compare করে দেখব কোনটি ছোট।
-        // তাই আমরা সবসময় minimum cost (shortest edge) রেখে দিই।
+         যদি একই দুইটি node এর মধ্যে একাধিক edge থাকে (যেমন: 0→3 = 5, আবার 0→3 = 1),
+         তাহলে প্রথমবার একটি value set হবে, পরবর্তীতে নতুন edge আসলে আগের value এর সাথে compare করে দেখব কোনটি ছোট।
+         তাই আমরা সবসময় minimum cost (shortest edge) রেখে দিই।
          */
     }
 
