@@ -1,12 +1,8 @@
-
-
 #include <bits/stdc++.h>
+
 using namespace std;
-// https://phitron.io/ph068/video/ph068-11_3-find-operation-implementation
-
-int parentArr[1005];
-int group_size[1005];
-
+int parentArr[100005];
+int group_size[100005];
 int findLeader(int node)
 {
 
@@ -17,7 +13,6 @@ int findLeader(int node)
 
     return leader;
 }
-// https://phitron.io/ph068/video/ph068-11_7-union-operation-implementation
 void dsu_union(int node1, int node2)
 {
     int leader1 = findLeader(node1);
@@ -33,20 +28,30 @@ void dsu_union(int node1, int node2)
         group_size[leader2] += group_size[leader1];
     }
 }
-
 int main()
 {
-
     memset(parentArr, -1, sizeof(parentArr));
     memset(group_size, 1, sizeof(group_size));
-    dsu_union(1, 2);
-    dsu_union(0, 2);
-    dsu_union(3, 2);
-
-    for (int i = 0; i < 6; i++)
+    int totalNode, totalEdge;
+    cin >> totalNode >> totalEdge;
+    //
+    int numOfCycle = 0;
+    ;
+    while (totalEdge--)
     {
-        cout << i << " leader => " << parentArr[i] << endl;
+        int nodeA, nodeB;
+        cin >> nodeA >> nodeB;
+        int leaderA = findLeader(nodeA);
+        int leaderB = findLeader(nodeB);
+        if (leaderA == leaderB)
+        {
+            numOfCycle++;
+        }
+        else
+        {
+            dsu_union(nodeA, nodeB);
+        }
     }
-
+    cout << numOfCycle;
     return 0;
 }
