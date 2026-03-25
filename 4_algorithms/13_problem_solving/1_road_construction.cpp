@@ -20,17 +20,21 @@ void dsu_union(int node1, int node2)
     int leader2 = findLeader(node2);
     if (leader1 == leader2)
     {
+        return;
     }
     if (group_size[leader1] >= group_size[leader2])
     {
         parentArr[leader2] = leader1;
         group_size[leader1] += group_size[leader2];
+        totalComponent = max(group_size[leader1], totalComponent);
     }
     else
     {
         parentArr[leader1] = leader2;
         group_size[leader2] += group_size[leader1];
+        totalComponent = max(group_size[leader2], totalComponent);
     }
+    maxSizeOfComp--;
 };
 int main()
 {
