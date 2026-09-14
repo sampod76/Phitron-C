@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
 // module dsa- > 3_4 Range Sum Query prefix sum solution II
 // https://phitron.io/ph048/video/ph048-3_4-range-sum-query-prefix-sum-solution-ii
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
